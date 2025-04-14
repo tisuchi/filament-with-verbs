@@ -2,16 +2,19 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\TodoResource\Pages;
-use App\Filament\Resources\TodoResource\RelationManagers;
-use App\Models\Todo;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
+use App\Models\Todo;
 use Filament\Tables;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
+use App\Filament\Resources\TodoResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\TodoResource\RelationManagers;
+use Filament\Forms\Components\RichEditor;
 
 class TodoResource extends Resource
 {
@@ -23,7 +26,18 @@ class TodoResource extends Resource
     {
         return $form
             ->schema([
-                //
+                TextInput::make('title')
+                    ->required()
+                    ->placeholder('What do you need to do?')
+                    ->columnSpanFull()
+                    ->maxLength(255),
+                RichEditor::make('description')
+                    ->columnSpanFull()
+                    ->placeholder('What is the description of the todo?')
+                    ->maxLength(255),
+                Checkbox::make('is_completed')
+                    ->label('Completed')
+                    ->default(false),
             ]);
     }
 
@@ -31,7 +45,16 @@ class TodoResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('title')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('description')
+                    ->html()
+                    ->limit(50),
+                Tables\Columns\CheckboxColumn::make('is_completed')
+                    ->label('Completed'),
+                Tables\Columns\TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable(),
             ])
             ->filters([
                 //

@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Glhd\Bits\Database\HasSnowflakes;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Todo extends Model
 {
     use HasFactory;
+    use HasSnowflakes;
 
     protected $fillable = ['title', 'description', 'is_completed', 'user_id'];
 
