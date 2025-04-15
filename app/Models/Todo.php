@@ -11,7 +11,7 @@ class Todo extends Model
     use HasFactory;
     use HasSnowflakes;
 
-    protected $fillable = ['title', 'description', 'is_completed', 'user_id'];
+    protected $fillable = ['id', 'title', 'description', 'is_completed', 'user_id'];
 
     public function user()
     {

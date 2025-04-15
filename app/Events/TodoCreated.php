@@ -23,7 +23,7 @@ class TodoCreated extends Event
     public function apply(TodoState $state)
     {
         $state->title = $this->title;
-        $state->description = $this->description ?? null;
+        $state->description = $this->description;
         $state->isCompleted = $this->isCompleted;
         $state->userId = $this->userId;
     }
