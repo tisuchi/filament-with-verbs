@@ -18,9 +18,10 @@ class CreateTodo extends CreateRecord
     {
         // Fire the TodoCreated event instead of creating the record through Filament
         TodoCreated::commit(
+            todoId: snowflake_id(),
             title: $data['title'],
-            description: $data['description'] ?? null,
-            isCompleted: $data['is_completed'] ?? false,
+            description: $data['description'],
+            isCompleted: $data['is_completed'],
             userId: Auth::id(),
         );
 

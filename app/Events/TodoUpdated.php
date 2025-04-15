@@ -10,9 +10,9 @@ use Thunk\Verbs\Attributes\Autodiscovery\StateId;
 class TodoUpdated extends Event
 {
     #[StateId(TodoState::class)]
-    public int $id;
+    public int $todoId;
 
-    public string $title;
+    public ?string $title;
 
     public ?string $description;
 
@@ -27,11 +27,7 @@ class TodoUpdated extends Event
 
     public function handle(TodoState $state)
     {
-        // dump([
-        //     "ID: $this->id" => Todo::find($this->id)]
-        // );
-
-        Todo::findOrFail($this->id)->update([
+        return Todo::findOrFail($this->todoId)->update([
             'title' => $state->title,
             'description' => $state->description,
             'is_completed' => $state->isCompleted,

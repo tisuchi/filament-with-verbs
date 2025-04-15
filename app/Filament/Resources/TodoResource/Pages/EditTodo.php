@@ -22,7 +22,7 @@ class EditTodo extends EditRecord
     protected function mutateFormDataBeforeSave(array $data): array
     {
         TodoUpdated::commit(
-            id: $this->record->id,
+            todoId: $this->record->id,
             title: $data['title'],
             description: $data['description'] ?? null,
             isCompleted: $data['is_completed'] ?? false,

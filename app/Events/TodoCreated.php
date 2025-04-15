@@ -10,7 +10,7 @@ use Thunk\Verbs\Attributes\Autodiscovery\StateId;
 class TodoCreated extends Event
 {
     #[StateId(TodoState::class)]
-    public int $id;
+    public int $todoId;
 
     public string $title;
 
@@ -23,14 +23,15 @@ class TodoCreated extends Event
     public function apply(TodoState $state)
     {
         $state->title = $this->title;
-        $state->description = $this->description;
+        $state->description = $this->description ?? null;
         $state->isCompleted = $this->isCompleted;
         $state->userId = $this->userId;
     }
 
     public function handle(TodoState $state)
     {
-        Todo::create([
+        return Todo::create([
+            'id' => $this->todoId,
             'title' => $state->title,
             'description' => $state->description,
             'is_completed' => $state->isCompleted,
