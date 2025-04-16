@@ -9,6 +9,27 @@ This project demonstrates:
 - Ability to rebuild application state from events using `php artisan verbs:replay`
 - Practical example of event sourcing benefits (auditability, time-travel debugging, resilience)
 
+## Table of Contents
+
+- [Filament PHP with Verbs: Event Sourcing in Laravel](#filament-php-with-verbs-event-sourcing-in-laravel)
+  - [TL;DR](#tldr)
+  - [Table of Contents](#table-of-contents)
+  - [What is Event Sourcing?](#what-is-event-sourcing)
+  - [Getting Started](#getting-started)
+  - [Admin Panel](#admin-panel)
+    - [Authentication](#authentication)
+    - [Dashboard](#dashboard)
+    - [Todo Management](#todo-management)
+      - [Creating a Todo Item](#creating-a-todo-item)
+      - [Updating a Todo Item](#updating-a-todo-item)
+  - [Database Architecture with Verbs](#database-architecture-with-verbs)
+    - [1. `verb_events` Table](#1-verb_events-table)
+    - [2. `verb_snapshots` Table](#2-verb_snapshots-table)
+    - [3. `verb_state_events` Table](#3-verb_state_events-table)
+    - [4. `todos` Table (Domain Table)](#4-todos-table-domain-table)
+  - [Event Replay Demonstration](#event-replay-demonstration)
+  - [Behind the Scenes](#behind-the-scenes)
+
 This repository demonstrates the integration of [Filament PHP](https://filamentphp.com/) (a powerful admin panel framework) with [Verbs](https://verbs.thunk.dev/) (an event sourcing package for Laravel) through a Todo application example. This project showcases how to implement event sourcing principles in a Laravel application with a beautiful admin interface.
 
 ## What is Event Sourcing?
